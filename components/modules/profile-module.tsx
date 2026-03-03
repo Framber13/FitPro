@@ -7,10 +7,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { getProfile, saveProfile } from "@/lib/store"
+import { getProfile, saveProfile, signOutUser } from "@/lib/store"
 import { formatDate } from "@/lib/fitness-utils"
 import type { UserProfile, AppView } from "@/lib/types"
-import { User, Save, Calendar, Target, TrendingUp } from "lucide-react"
+import { User, Save, Calendar, Target, TrendingUp, LogOut } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 interface ProfileModuleProps {
@@ -259,6 +259,21 @@ export function ProfileModule({ onNavigate }: ProfileModuleProps) {
             </div>
           </CardContent>
         </Card>
+      )}
+      {/* --- BOTÓN DE CERRAR SESIÓN --- */}
+      {!editing && (
+        <Button 
+          variant="destructive" 
+          className="w-full mt-6" 
+          onClick={() => {
+            if (confirm("¿Estás seguro de que deseas cerrar sesión? Tendrás que volver a crear tu perfil.")) {
+              signOutUser()
+            }
+          }}
+        >
+          <LogOut className="mr-2 h-4 w-4" />
+          Cerrar Sesión
+        </Button>
       )}
     </div>
   )

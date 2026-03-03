@@ -126,3 +126,15 @@ export function addFood(food: FoodItem) {
   custom.push(food)
   setItem(KEYS.foods, custom)
 }
+
+// ---- Sign Out ----
+export function signOutUser() {
+  if (typeof window === "undefined") return
+  
+  // Esto borra el perfil del usuario pero mantiene sus rutinas y medidas guardadas
+  // Si prefieres que se borre ABSOLUTAMENTE TODO, cambia esta línea por: window.localStorage.clear()
+  window.localStorage.removeItem(KEYS.profile)
+  
+  // Recarga la página para que la app detecte que no hay perfil y vuelva al Onboarding
+  window.location.reload()
+}
